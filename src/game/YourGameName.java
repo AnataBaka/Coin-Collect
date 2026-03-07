@@ -1,5 +1,7 @@
 package game;
-
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 /*
 CLASS: YourGameNameoids
 DESCRIPTION: Extending Game, YourGameName is all in the paint method.
@@ -11,13 +13,21 @@ import java.awt.*;
 import java.awt.event.*;
 
 class YourGameName extends Game {
+	PlayerChar player;
 	static int counter = 0;
+	
 
-  public YourGameName() {
-    super("YourGameName!",800,600);
-    this.setFocusable(true);
-	this.requestFocus();
-  }
+	public YourGameName() {
+		super("YourGameName!", 800, 600);
+		this.setFocusable(true);
+		this.requestFocus();
+		Point[] playerPoints = { new Point(0, 0), new Point(20, 0), new Point(20, 20), new Point(0, 20) };
+
+		player = new PlayerChar(playerPoints, new Point(400, 300), 0);
+
+		this.addKeyListener(player);
+		this.requestFocusInWindow();
+	}
   
 	public void paint(Graphics brush) {
     	brush.setColor(Color.black);
@@ -29,6 +39,10 @@ class YourGameName extends Game {
     	counter++;
     	brush.setColor(Color.white);
     	brush.drawString("Counter is " + counter,10,10);
+    	brush.setColor(Color.red);
+
+    	player.move();
+    	player.paint(brush);    	
   }
   
 	public static void main (String[] args) {
