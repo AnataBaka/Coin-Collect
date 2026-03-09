@@ -25,7 +25,21 @@ class YourGameName extends Game {
 
 		player = new PlayerChar(playerPoints, new Point(400, 300), 0);
 
-		this.addKeyListener(player);
+		this.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyPressed(KeyEvent e) {
+	            if (e.getKeyCode() == KeyEvent.VK_UP) player.forward = true;
+	            if (e.getKeyCode() == KeyEvent.VK_LEFT) player.left = true;
+	            if (e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = true;
+	        }
+
+	        @Override
+	        public void keyReleased(KeyEvent e) {
+	            if (e.getKeyCode() == KeyEvent.VK_UP) player.forward = false;
+	            if (e.getKeyCode() == KeyEvent.VK_LEFT) player.left = false;
+	            if (e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = false;
+	        }
+	    });
 		this.requestFocusInWindow();
 	}
   
