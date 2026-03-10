@@ -33,11 +33,17 @@ public class CollectableObject1 extends Polygon implements ObjectInterface {
 		brush.fillPolygon(xPoints, yPoints, points.length);
 
 	}
-	@Override
-	public
-	void rotateObject() {
-		rotate(3);
-	}
+    private class SpinBehavior {
+        public void spin() {
+            rotate(3);
+        }
+    }
+
+    private SpinBehavior spinner = new SpinBehavior();
+    @Override
+    public void rotateObject() {
+        spinner.spin();
+    }
 	@Override
 	public
 	int GetPoints() {
