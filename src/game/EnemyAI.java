@@ -18,7 +18,7 @@ public class EnemyAI extends Polygon {
             position.x += moveSpeed * Math.cos(angle);
             position.y += moveSpeed * Math.sin(angle);
             rotation = Math.toDegrees(angle);
-        }
+            }
     }
 
     private PathFinder brain = new PathFinder();
@@ -33,6 +33,13 @@ public class EnemyAI extends Polygon {
         if (this.collides(player)) {
             collisionBehavior.accept(player);
         }
+    }
+    /**
+     * Increases the enemy's movement speed by a specified multiplier.
+     * @param amount The value to add to the current speed.
+     */
+    public void increaseSpeed(double amount) {
+        this.moveSpeed += amount;
     }
 
     public void paint(Graphics brush) {
