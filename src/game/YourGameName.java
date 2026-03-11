@@ -16,6 +16,7 @@ import java.awt.event.*;
 class YourGameName extends Game {
 	PlayerChar player;
 	CollectableObject1 coin;
+	EnemyAI enemy;
 	int counter = 0;
 
 	public YourGameName() {
@@ -26,6 +27,11 @@ class YourGameName extends Game {
 		coin = new CollectableObject1(new Point(200, 200));
 
 		player = new PlayerChar(playerPoints, new Point(400, 300), 0);
+		Point[] enemyPoints = { new Point(20, 10), new Point(0, 0), new Point(0, 20) };		
+		enemy = new EnemyAI(enemyPoints, new Point(100, 100), (p) -> {
+            System.out.println("GAME OVER!");
+            this.on = false; 
+        });
 
 		this.addKeyListener(new KeyAdapter() {
 			@Override
@@ -72,6 +78,23 @@ class YourGameName extends Game {
 		    player.move();
 		    player.paint(brush);
 		}
+		if (enemy != null) {
+            enemy.update(player); 
+            enemy.paint(brush);
+
+        }
+		if (coin != null) {
+		    if (!coin.isCollected() && player.collides(coin)) {
+		    	counter++;
+		        double newX = Math.random() * (width - 40) + 20;
+		        double newY = Math.random() * (height - 40) + 20;
+		        
+		        coin.position.setX(newX);
+		        coin.position.setY(newY);
+		    }
+		    coin.draw(brush);
+		}
+
 		coin.draw(brush);
 
 	}
