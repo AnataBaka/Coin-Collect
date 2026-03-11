@@ -13,13 +13,13 @@ NOTE: This class is the metaphorical "main method" of your program,
 import java.awt.*;
 import java.awt.event.*;
 
-class YourGameName extends Game {
+class Coin_Collect extends Game {
 	PlayerChar player;
 	CollectableObject1 coin;
 	EnemyAI enemy;
 	int counter = 0;
 
-	public YourGameName() {
+	public Coin_Collect() {
 		super("YourGameName!", 800, 600);
 		this.setFocusable(true);
 		this.requestFocus();
@@ -100,7 +100,7 @@ class YourGameName extends Game {
 	}
 
 	public static void main(String[] args) {
-		YourGameName a = new YourGameName();
+		Coin_Collect a = new Coin_Collect();
 		a.repaint();
 	}
 }
