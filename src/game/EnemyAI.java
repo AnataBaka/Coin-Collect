@@ -8,7 +8,9 @@ public class EnemyAI extends Polygon {
     private double moveSpeed = 1.8;
     private Color color = Color.RED;
     private Consumer<PlayerChar> collisionBehavior;
-
+    /**
+     * Enemy Ai that pursues player char to kill them
+     */
     private class PathFinder {
         public void updatePosition(Point target) {
             double diffX = target.x - position.x;
@@ -22,12 +24,22 @@ public class EnemyAI extends Polygon {
     }
 
     private PathFinder brain = new PathFinder();
-
-    public EnemyAI(Point[] shape, Point position, Consumer<PlayerChar> onCollision) {
+    /**
+     * Constructs enemy with shape, positions, and has a variable to determine
+     * collision
+     * @param shape
+     * @param position
+     * @param onCollision
+     */
+    public EnemyAI(Point[] shape, Point position,
+    		Consumer<PlayerChar> onCollision) {
         super(shape, position, 0);
         this.collisionBehavior = onCollision;
     }
-
+    /**
+     * Calculates vector towards the player char
+     * @param player to follow
+     */
     public void update(PlayerChar player) {
         brain.updatePosition(player.position);
         if (this.collides(player)) {
@@ -35,13 +47,16 @@ public class EnemyAI extends Polygon {
         }
     }
     /**
-     * Increases the enemy's movement speed by a specified multiplier.
+     * Increases the enemy's movement speed by a specified multiplier
      * @param amount The value to add to the current speed.
      */
     public void increaseSpeed(double amount) {
         this.moveSpeed += amount;
     }
-
+    /**
+     * Handles the painting of the enemy AI
+     * @param brush to draw the enemy AI
+     */
     public void paint(Graphics brush) {
         Point[] points = this.getPoints();
         int[] x = new int[points.length];
