@@ -34,11 +34,13 @@ class Coin_Collect extends Game {
         this.startTime = System.currentTimeMillis();
         this.setFocusable(true);
 		this.requestFocus();
-		Point[] playerPoints = { new Point(0, 0), new Point(20, 0), new Point(20, 20), new Point(0, 20) };
+		Point[] playerPoints = { new Point(0, 0), new Point(20, 0), 
+				new Point(20, 20), new Point(0, 20) };
 		coin = new CollectableObject1(new Point(200, 200));
 
 		player = new PlayerChar(playerPoints, new Point(400, 300), 0);
-		Point[] enemyPoints = { new Point(20, 10), new Point(0, 0), new Point(0, 20) };		
+		Point[] enemyPoints = { new Point(20, 10), new Point(0, 0), 
+				new Point(0, 20) };		
 		enemy = new EnemyAI(enemyPoints, new Point(100, 100), (p) -> {
             System.out.println("GAME OVER!");
             this.on = false; 
@@ -113,10 +115,12 @@ class Coin_Collect extends Game {
 		brush.setColor(Color.white);
 		brush.setColor(Color.red);
 
-		if (!coin.isCollected() && player.collides(coin)) {
-			coin.Collect();
-			counter++;
-			System.out.println("Player has collected a coin!!");
+
+		if (coin != null) {
+		    if (coin.isCollected()) {
+				counter++;
+				System.out.println("Player has collected a coin!!");
+		    }
 		}
 		brush.drawString("Counter is " + counter, 10, 25);
 		//player logic
